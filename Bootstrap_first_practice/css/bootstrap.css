@@ -1,0 +1,98 @@
+
+body {
+      background: url("../images/Animal-Crossing-iPhone-wallpaper-Matt-MacPherson-iDownloadblog-2.png") repeat;
+  }
+
+  .navbar-brand img {
+      width: 120px;
+      margin: 0;
+  }
+
+  .navbar-nav .nav-item>.nav-link {
+      color: green;
+  }
+
+  .banner {
+      background: url("../images/Wallpaper_acnh_1920_1080.jpg") right center;
+      background-size: cover;
+      height: 600px;
+  }
+
+  .img-placeholder {
+      width: 140px;
+      height: 140px;
+      background: oldlace;
+      border-radius: 50%;
+      overflow: hidden;
+  }
+
+  .img-placeholder img {
+      width: 100%;
+      object-fit: cover;
+  }
+
+  .box p {
+      font-weight: bolder;
+      letter-spacing: 2px;
+      padding: 5px;
+  }
+
+  .main-section {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      padding: 10px 30px;
+  }
+
+  .main-section .actrile h1 a {
+      text-decoration: none;
+      color: black;
+  }
+
+  .main-section .actrile h1 a:hover {
+      color: darkgreen;
+  }
+
+  .main-section .actrile .text p {
+      font-size: 18px;
+  }
+
+  .main-section .actrile figure {
+      border-radius: 5px;
+      width: 100%;
+  }
+
+  .main-section .actrile figure img {
+      width: 100%;
+      object-fit: cover;
+  }
+
+  .main-footer {
+      background: url("../images/intro_slide03_chara__sp.png") no-repeat center center;
+      height: 300px;
+      text-align: center;
+  }
+
+  @media screen and (min-width: 1140px) {
+      .banner {
+          min-height: 800px;
+          background: url("../images/Wallpaper_acnh_1920_1080.jpg") no-repeat center;
+      }
+  }
+
+  @media screen and (max-width: 576px) {
+      .banner {
+          height: 400px;
+          background: url("../images/Wallpaper_acnh_1920_1080.jpg") no-repeat right;
+          background-size: 600px 400px;
+      }
+
+      .main-section .actrile .text p {
+          font-size: 1.1rem;
+          letter-spacing: 3px;
+      }
+
+      .main-footer {
+          background-size: cover;
+          height: 130px;
+      }
+  }
