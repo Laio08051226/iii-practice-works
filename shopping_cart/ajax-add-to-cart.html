@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>add to cart by ajax</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+        body {
+            background: lightgoldenrodyellow;
+        }
+
+        .card {
+            width: 320px;
+            box-shadow: 2px 5px gray;
+        }
+
+        img {
+            width: 100%;
+            /* object-fit: contain; */
+            /* height: 100%; */
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .fa-shopping-cart {
+            /* position: absolute; */
+            font-size: 50px;
+            /* height: 50px; */
+        }
+
+        .shopping-cart {
+            position: absolute;
+            display: inline-block;
+            background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
+            width: 24px;
+            height: 24px;
+            top: 10%;
+            left: 110%;
+            cursor: pointer;
+            /* margin: 0 10px 0 0; */
+        }
+
+        .cart-list {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 108%;
+        }
+
+        .active.cart-list {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card-wrapper d-flex">
+            <!-- <div class="card m-3">
+                <img src="images/item-apple.jpg" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">蘋果</h5>
+                    <div class="d-flex justify-content-between">
+                        <span style="color:red">20$</span>
+                        <div class="py-2">
+                            <button type="button" class="btn btn-success">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <span><i class="shopping-cart"></i></span>
+
+        <!-- 購物車 -->
+        <div class="card cart-list">
+            <div class="card-body">
+                <h4>購物車</h4>
+                <table class="table">
+                    <thead>
+                        <tr class="text-nowrap text-center">
+                            <th>品名</th>
+                            <th>單價</th>
+                            <th>數量</th>
+                            <th>小計</th>
+                        </tr>
+                    </thead>
+                    <tbody class="showList">
+                        <!-- cart contents show here! -->
+                    </tbody>
+                </table>
+                <tfoot class="text-right pl-2">
+                    <tr>
+                        <td class="text-right">
+                            總價: <span id="total">0</span>
+                        </td>
+                    </tr>
+                </tfoot>
+                <div class="py-2">
+                    <button type="button" class="btn btn-info btn-block" id="bill">結帳</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        //變數設定
+        let total = 0;
+        let buyItems = [];
+        let productData = []
+        let subtotal = 0;
+        let cart = $(".shopping-cart")
+
+        $.ajax({
+            method: "GET",
+            url: "food.json",
+            dataType: "json"
+        })
+            //接收產品資料成功，生成產品card
+            .done(function (response) {
+                let data = "";
+                productData = response;
+                productData.forEach(function (item, index) {
+                    data += `
+                <div class="card m-3">
+                <img src="images/${item.image}" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">${item.name}</h5>
+                    <div class="d-flex justify-content-between">
+                        <span class="price" data-price="${item.price}" style="color:red">${item.price}$</span>
+                        <div class="py-2">
+                            <button type="button" class="btn btn-success" id="addCart" data-amount="1">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`})
+                $(".card-wrapper").append(data)
+            })
+        //加入購物車
+        $(".card-wrapper").on("click", "#addCart", function () {
+            let name = $(this).closest(".card-body").find(".card-title").text()
+            let price = $(this).closest(".card-body").find(".price").data("price")
+            let amount = $(this).data("amount")
+            // let cart = $(".shopping-cart")
+            let imgToDrag = $(this).parents(".card").find("img").eq(0)
+            // console.log(imgToDrag)
+            let addTarget = buyItems.find(item => item.name === name)
+            if (addTarget) {
+                addTarget.amount += 1
+            } else {
+                buyItems.push({
+                    name: name,
+                    price: price,
+                    amount: amount,
+                })
+            }
+
+            let cart_item = "";
+            cart_item = buyItems.map(item => `
+                        <tr>
+                              <td class="name">${item.name}</td>
+                              <td class="price">${item.price}</td>
+                              <td><input class="form-control amount" type="number" value="${item.amount}" style="width: 70%" readonly></td>
+                              <td><span class="text-right s_price">${item.price * item.amount}</span></td>
+                          </tr>
+            `
+            )
+            $("tbody").html(cart_item)
+            count(price) //呼叫計算函式
+            console.log(buyItems)
+
+            //商品動畫到購物車
+            if (imgToDrag) {
+                let imgClone = imgToDrag.clone()
+                    .offset({
+                        top: imgToDrag.offset().top,
+                        left: imgToDrag.offset().left
+                    })
+                    .css({
+                        "opacity": "0.5",
+                        "position": "absolute",
+                        "height": "150px",
+                        "width": "200px",
+                        "z-index": "100"
+                    })
+                    .appendTo($('body'))
+                    .animate({
+                        "top": cart.offset().top + 10,
+                        "left": cart.offset().left + 10,
+                        "width": 75,
+                        "height": 75
+                    }, 1000);
+
+                imgClone.animate({
+                    "width": 0,
+                    "height": 0
+                }, ()=> {
+                    imgClone.detach()
+                })
+
+                setTimeout(function () {
+                    cart.effect("bounce", {
+                        time: 2
+                    }, 200)
+                }, 1500)
+            }
+        })
+
+        //計算總價函示
+        function count(price) {
+            total += price
+            $("#total").text("$" + total);
+        }
+        
+        //結帳判斷
+        $("#bill").click(function () {
+            if (buyItems.length != 0) {
+                let yes = confirm(`總金額: ${total}$\n請問要付款嗎?`)
+                if (yes) {
+                    alert(`謝謝關顧，歡迎再來 :)`)
+                    location.reload()
+                } else {
+                    alert(`產品保留，可稍後再做付款動作`)
+                }
+            }else {
+                alert("購物車尚無商品唷!")
+            }
+
+        })
+
+        //點擊購物車(顯示/隱藏)
+        $(".shopping-cart").click(function () {
+            // $(".cart-list").css("display", "block")
+            // setTimeout(function(){
+            //     $(".cart-list").css("display", "none")
+            // }, 1000*10)
+            $(".cart-list").toggleClass("active")
+        })
+    </script>
+</body>
+
+</html>
