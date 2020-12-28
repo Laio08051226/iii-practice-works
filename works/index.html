@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Works</title>
+    <style>
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 600% 600%;
+            animation: gradient 30s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card {
+            border-radius: 10px;
+            transition: .5s;
+            max-height: 20rem;
+        }
+
+        .card:hover {
+            box-shadow: inset 0px 0px 50px 0px white,9px 11px 5px 1px #242424;
+        }
+
+        img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        img:hover {
+            filter: brightness(0.9)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card" >
+                    <a href="https://laio08051226.github.io/iii-practice-works/works/Bootstrap_first_practice">
+                        <img src="images/animals.PNG" class="card-img-top" alt="...">
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">動物森友會簡易網站( bootstrap )</h5>
+                        <p class="card-text">練習簡易切版</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <a href="https://laio08051226.github.io/iii-practice-works/works/shopping_cart">
+                        <img src="images/shopping-cart.PNG" class="card-img-top" alt="...">
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">購物車( jQuery )</h5>
+                        <p class="card-text">模擬一般電商網站的購物車功能</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <a href="https://laio08051226.github.io/iii-practice-works/works/flip_card">
+                        <img src="images/flip-cards.PNG" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">翻牌遊戲( jQuery )</h5>
+                        <p class="card-text">以神奇寶貝做為一個小主題來製作的翻牌遊戲</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

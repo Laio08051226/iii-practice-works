@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <title>寶可夢卡牌</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<style>
+body{
+  margin:50px;
+  
+}
+.container{
+  /*perspective:1000px;*/
+  /*perspective:1000px;*/
+  width: 60vw;
+  margin: 0 auto;
+  position: relative;
+  transition: .5s;
+  filter:brightness(.5)
+}
+.box img{
+  width:300px;
+}
+.card{
+  position: relative;
+  transform-style:preserve-3d;
+  float:left;
+  margin: 0 20px 20px;
+  width:200px;
+  height:280px; 
+  /*height:400px;*/
+}
+/* .card:active{
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+} */
+.card.active{
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+.card.bingo {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+.card img{
+  width:100%;
+  position: absolute;
+  left:0;
+  top:0;
+  display: block;
+  -webkit-backface-visibility: hidden;  
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.front{
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+/* .back{
+  
+} */
+.transition{
+  transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.box:hover{
+  transform:rotateY(180deg);
+  -webkit-transform:rotateY(180deg);
+}
+.message {
+  width: 400px;
+  height: 400px;
+  background: #ececec;
+  border-radius: 50%;
+  box-shadow: 0px 2px 8px gray;
+  position: absolute;
+  left: 40%;
+  transform: translateY(-500px);
+  border: 1px solid #ccc;
+  transition: .5s;
+  background: url("images/pokeball.png");
+  background-size: 400px 400px;
+  position: relative;
+}
+#start {
+  position: absolute;
+  left: 38%;
+  top: 38%;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: block;
+  width: 100px;
+  height: 100px;
+  padding-top: 37px;
+  font-size: 24px;
+  text-shadow: 3px 0px 5px gray;
+}
+#start:hover {
+  color: blue;
+}
+</style>
+<body>
+  <div class="container">
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/1.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/1.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/4.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/4.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/7.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/7.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/25.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/25.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/37.png" alt="">
+      </div>
+    </div>
+    <div class="card transition">
+      <div class="card_wrap">
+        <img class="back" src="images/ballcard.png">
+        <img class="front" src="images/37.png" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="py-2">
+    <button type="button" class="btn btn-primary" id="reset" style="display: none;">重新開始</button>
+  </div>
+  <div class= "message text-center">
+    <a role="button" id="start">開始</a>
+  </div>
+</body>
+</html>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+  // 變數設定
+  let cardImg1 = ""
+  let cardImg2 = ""
+
+  setTimeout(function(){
+    $(".message").css("transform", "translateY(200px)")
+  },700)
+  
+  
+  //洗牌
+  for(let i=0; i<$(".container .card").length; i++){
+    let random = Math.floor(Math.random()* $(".container .card").length)
+    // $(".container .card").eq(0)
+    $(".container .card").eq(random).appendTo(".container")
+  }
+  
+  //遊戲開始
+  $("#start").click(function(){
+    setTimeout(function(){
+      $("#start").text(3)
+      setTimeout(function(){
+        $("#start").text(2)
+        setTimeout(function(){
+          $("#start").text(1)
+          setTimeout(function(){
+             $(".message").css({
+      // "display": "none",
+      "transform": "translateY(-600px)",
+      })
+    $(".container").css("filter", "brightness(1)")
+    showCard()
+          })
+        },1000)
+      },1000)
+    },1000)
+   
+  })
+  
+  //show出卡片
+  function showCard() {
+        setTimeout(function() {
+      $(".container .card").addClass("active")
+        setTimeout(function(){
+          $(".container .card").removeClass("active")
+        }, 3000)
+    },1000)
+  }
+ 
+  
+
+  //點擊卡片
+  $(".container").on("click", ".card", function() {
+    $(this).toggleClass("active")
+    // console.log($(".card.active").length)
+    if($(".card.active").length %2 ==1){
+      cardImg1 = $(this).find(".front").attr("src")
+      console.log("cardImg1: " + cardImg1)
+    } else {
+      cardImg2= $(this).find(".front").attr("src")
+      console.log("cardImg2: " + cardImg2)
+      setTimeout(removeClass, 500)
+    }
+  })
+  
+  //判斷卡片有無相符
+  function removeClass() {
+    if(cardImg1 == cardImg2){
+     $(".container .active").addClass("bingo")
+     $(".card").removeClass("active")
+     if(($(".container .bingo").length)%2==1){
+       $(".container .card").removeClass("bingo")
+     }
+     if($(".card.bingo").length == $(".container .card").length) {
+        alert("恭喜完成!\n點擊重新開始按鈕，可再繼續遊玩")
+        // location.reload()
+        $("#reset").css("display", "block")
+      }
+    }else {
+      $(".card.active").removeClass("active")
+    }
+  }
+
+  //重新開始
+  $("#reset").click(function() {
+    location.reload()
+  })
+</script>
